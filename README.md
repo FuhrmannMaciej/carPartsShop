@@ -2,7 +2,7 @@
 
 ## Zadania do zrealizowania
 - Stworzenie szkieletu projektu (encje, kontrolery, serwisy)
-- Utworzenie bazy danych zawierającej informacje o częściach samochodowych (Microsoft SQL Server Database)
+- Utworzenie bazy danych zawierającej informacje o częściach samochodowych
 - Uzupełnienie bazy danych przykładowymi danymi
 - Dodanie ORM (Hibernate)
 - Implementacja REST API (CRUD)
