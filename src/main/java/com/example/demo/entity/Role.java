@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(name = "role")
 public class Role {
@@ -17,4 +16,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    public Role(String name) {
+        super();
+        this.name = name;
+    }
 }

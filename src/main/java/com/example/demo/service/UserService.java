@@ -1,12 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.User;
+import com.example.demo.web.dto.UserRegistrationDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    User saveUser(User user);
+    User saveUser(UserRegistrationDto registrationDto);
 
     List<User> getAllUsers();
 
