@@ -2,10 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.entity.User;
 import com.example.demo.web.dto.UserRegistrationDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     User saveUser(UserRegistrationDto registrationDto);
 

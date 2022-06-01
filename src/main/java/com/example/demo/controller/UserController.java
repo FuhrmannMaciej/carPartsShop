@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
+import com.example.demo.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User saveUser(@Valid @RequestBody User user) {
+    public User saveUser(@Valid @RequestBody UserRegistrationDto user) {
         return userService.saveUser(user);
     }
 
