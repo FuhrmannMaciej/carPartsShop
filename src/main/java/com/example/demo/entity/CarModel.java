@@ -21,7 +21,7 @@ public class CarModel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "yearOfProduction")
+    @Column(name = "year_of_production")
     private int yearOfProduction;
 
     @ManyToMany(mappedBy = "carModels")
