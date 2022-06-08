@@ -1,16 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.CarModel;
-import com.example.demo.entity.User;
-import com.example.demo.web.dto.UserRegistrationDto;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface CarModelService {
 
-    Collection<CarModel> getAllCarModels();
+    Page<CarModel> getAllCarModels(PageRequest pageRequest);
 
     CarModel getCarModelById(Long id);
 

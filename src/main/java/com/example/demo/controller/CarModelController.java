@@ -3,19 +3,21 @@ package com.example.demo.controller;
 import com.example.demo.entity.CarModel;
 import com.example.demo.service.CarModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-
 @RestController
+@RequestMapping("/api")
 public class CarModelController {
 
     @Autowired
     private CarModelService carModelService;
 
     @GetMapping("/car-models")
-    public Collection<CarModel> getAllCarModels() {
-        return carModelService.getAllCarModels();
+    public Page<CarModel> getAllCarModels(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "20") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return carModelService.getAllCarModels(pageRequest);
     }
 
     @GetMapping("/car-models/{id}")

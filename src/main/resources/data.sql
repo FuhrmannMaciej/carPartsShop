@@ -1,8 +1,10 @@
+set foreign_key_checks = 0;
+
 delete from car_model;
 
 delete from car_part;
 
-set foreign_key_checks = 0;
+delete from car_part_car_model;
 
 insert into car_model (id, name, year_of_production) values
 (1,'Mercedes-Benz', '1957'),

@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -24,6 +25,7 @@ public class CarModel {
     @Column(name = "year_of_production")
     private int yearOfProduction;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "carModels")
     private Collection<CarPart> carParts;
 

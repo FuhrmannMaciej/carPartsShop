@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class CarPart {
     @Column(name = "quantity")
     private int quantity;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "car_part_car_model", joinColumns = @JoinColumn(name = "car_part_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "car_model_id", referencedColumnName = "id"))
