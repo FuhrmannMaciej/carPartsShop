@@ -10,6 +10,8 @@ public interface CarModelService {
 
     Page<CarModel> getAllCarModels(PageRequest pageRequest);
 
+    Collection<CarModel> getAllCarModels();
+
     CarModel getCarModelById(Long id);
 
     CarModel saveCarModel(CarModel carModel);

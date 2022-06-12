@@ -1,10 +1,7 @@
 set foreign_key_checks = 0;
 
-delete from car_model;
-
-delete from car_part;
-
-delete from car_part_car_model;
+--insert into user (id, firstName, lastName, email, password, roles) values
+--(1, 'a', 'b', 'a', 'a12', '{"USER"}');
 
 insert into car_model (id, name, year_of_production) values
 (1,'Mercedes-Benz', '1957'),

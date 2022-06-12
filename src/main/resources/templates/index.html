@@ -21,6 +21,15 @@
 <div class="container">
     <h1>Car Parts Shop</h1>
     Welcome <span sec:authentication="principal.username"> User</span>
+    <br>
+    <br>
+
+    <div class="form-group col-md-8">
+        <label  class="col-form-label">Car Model </label>
+        <select  id="car_model" name="car_model" th:field="*{car_model.id}" >
+            <option th:each="car_model : ${car_models}" th:value="${car_model.id}" th:utext="${car_model.name}"></option>
+        </select>
+    </div>
 </div>
 </body>
 </html>
