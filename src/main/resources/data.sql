@@ -1,9 +1,17 @@
 set foreign_key_checks = 0;
 
---insert into user (id, firstName, lastName, email, password, roles) values
---(1, 'a', 'b', 'a', 'a12', '{"USER"}');
+insert into role (id, name)
+values (1, 'USER');
 
-insert into car_model (id, name, year_of_production) values
+insert into user (id, first_name, last_name, email, password)
+values
+(1, 'a', 'b', 'a', 'a');
+
+insert into user_roles (user_id, role_id)
+values (1, 1);
+
+insert into car_model (id, name, year_of_production)
+values
 (1,'Mercedes-Benz', '1957'),
 (2,'Mercedes-Benz', '1958'),
 (3,'Mercedes-Benz', '1959'),
