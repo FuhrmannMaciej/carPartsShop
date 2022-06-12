@@ -11,9 +11,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Service
-public class CarModelServiceImpl implements CarModelService {
+public class DefaultCarModelService implements CarModelService {
 
-    //TODO: Default Service change name
     @Autowired
     private CarModelRepository carModelRepository;
 

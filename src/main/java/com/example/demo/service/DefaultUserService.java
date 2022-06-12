@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class DefaultUserService implements UserService {
 
     private UserRepository userRepository;
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Lazy
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public DefaultUserService(UserRepository userRepository) {
         super();
         this.userRepository = userRepository;
     }

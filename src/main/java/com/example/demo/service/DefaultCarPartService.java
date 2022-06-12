@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Service
-public class CarPartServiceImpl implements CarPartService {
+public class DefaultCarPartService implements CarPartService {
 
     @Autowired
     private CarPartRepository carPartRepository;
