@@ -14,7 +14,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("car_model", carModelService.getAllCarModels());
+        model.addAttribute("car_models", carModelService.getAllCarModels());
         return "index";
     }
 
