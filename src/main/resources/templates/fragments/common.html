@@ -17,6 +17,7 @@
                     class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+            <a class="navbar-brand" href="#" th:href="@{/add-car-model}">Add Car Model</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul th:if="${#authorization.expression('isAuthenticated()')}" class="nav navbar-nav">
