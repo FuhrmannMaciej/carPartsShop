@@ -11,6 +11,11 @@ import java.util.Collection;
 @RequestMapping("/api")
 public class CarPartController {
 
+    //TODO: dodaj opcje dodawania i usuwania części/modeli samochodów
+    //TODO: rozdzielić projekt na mikroserwisy ten z dodawaniem i usuwaniem, drugi z wyświetlaniem/szukaniem (zrobić jeden model z carModel i carPart)
+    //TODO: konfiguracja kolejkowania w Kafka lub RabbitMQ
+    //TODO: Docker
+
     @Autowired
     private CarPartService carPartService;
 
@@ -22,11 +27,6 @@ public class CarPartController {
     @GetMapping("/car-parts/{id}")
     public CarPart getCarPartById(Long id) {
         return carPartService.getCarPartById(id);
-    }
-
-    @GetMapping("/car-parts/{name}")
-    public CarPart getCarPartByName(String name) {
-        return carPartService.getCarPartByName(name);
     }
 
     @PostMapping("/car-parts")
