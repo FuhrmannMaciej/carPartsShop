@@ -59,6 +59,6 @@ public class CarModelController {
             return "add-car-model";
         }
         carModelService.saveCarModel(carModel);
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
