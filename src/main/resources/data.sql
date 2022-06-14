@@ -5,7 +5,7 @@ values (1, 'USER');
 
 insert into user (id, first_name, last_name, email, password)
 values
-(1, 'a', 'b', 'a', 'a');
+(1, 'testUserFirstName', 'testUserLastName', 'user', '$2a$10$RzTAcKgyLyJs5QcMilSsYuKq4LsgDlwBL1idSZWI9pnION/8vWqMW');
 
 insert into user_roles (user_id, role_id)
 values (1, 1);
