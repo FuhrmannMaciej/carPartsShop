@@ -1,14 +1,18 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.CarPart;
+import com.example.demo.service.CarModelService;
 import com.example.demo.service.CarPartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
-@RestController
-@RequestMapping("/api")
+@Controller
 public class CarPartController {
 
     //TODO: dodaj opcje dodawania i usuwania części/modeli samochodów
@@ -19,28 +23,51 @@ public class CarPartController {
     @Autowired
     private CarPartService carPartService;
 
-    @GetMapping("/car-parts")
+    @Autowired
+    private CarModelService carModelService;
+
+    @GetMapping("/api/car-parts")
+    @ResponseBody
     public Collection<CarPart> getAllCarParts() {
         return carPartService.getAllCarParts();
     }
 
-    @GetMapping("/car-parts/{id}")
+    @GetMapping("/api/car-parts/{id}")
+    @ResponseBody
     public CarPart getCarPartById(Long id) {
         return carPartService.getCarPartById(id);
     }
 
-    @PostMapping("/car-parts")
+    @PostMapping("/api/car-parts")
+    @ResponseBody
     public CarPart saveCarPart(CarPart carPart) {
         return carPartService.saveCarPart(carPart);
     }
 
-    @PutMapping("/car-parts/{id}")
+    @PutMapping("/api/car-parts/{id}")
+    @ResponseBody
     public CarPart updateCarPart(CarPart carPart, Long id) {
         return carPartService.updateCarPart(carPart, id);
     }
 
-    @DeleteMapping("/car-parts/{id}")
+    @DeleteMapping("/api/car-parts/{id}")
+    @ResponseBody
     public void deleteCarPart(Long id) {
         carPartService.deleteCarPart(id);
+    }
+
+    @GetMapping("/add-car-part")
+    public String showAddCarPartForm(CarPart carPart) {
+        return "add-car-part";
+    }
+
+    @PostMapping("/add-car-part")
+    public String saveCarPart(@Valid CarPart carPart, BindingResult result, Model model) {
+        model.addAttribute("car_models", carModelService.getAllCarModels());
+        if (result.hasErrors()) {
+            return "add-car-part";
+        }
+        carPartService.saveCarPart(carPart);
+        return "redirect:/";
     }
 }
