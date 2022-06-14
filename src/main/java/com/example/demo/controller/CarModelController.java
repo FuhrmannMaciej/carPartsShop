@@ -49,7 +49,7 @@ public class CarModelController {
     }
 
     @GetMapping("/add-car-model")
-    public String showAddCarModelForm(CarModel carModel) {
+    public String showAddCarModelForm() {
         return "add-car-model";
     }
 

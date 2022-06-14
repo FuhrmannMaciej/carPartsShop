@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.CarModel;
 import com.example.demo.entity.CarPart;
 import com.example.demo.service.CarModelService;
 import com.example.demo.service.CarPartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,13 +60,13 @@ public class CarPartController {
     }
 
     @GetMapping("/add-car-part")
-    public String showAddCarPartForm(CarPart carPart) {
+    public String showAddCarPartForm(Model model) {
+        model.addAttribute("car_models", carModelService.getAllCarModels());
         return "add-car-part";
     }
 
     @PostMapping("/add-car-part")
-    public String saveCarPart(@Valid CarPart carPart, BindingResult result, Model model) {
-        model.addAttribute("car_models", carModelService.getAllCarModels());
+    public String saveCarPart(@Valid CarPart carPart, BindingResult result) {
         if (result.hasErrors()) {
             return "add-car-part";
         }
