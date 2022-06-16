@@ -4,6 +4,7 @@ import com.example.demo.entity.CarModel;
 import com.example.demo.entity.CarPart;
 import com.example.demo.service.CarModelService;
 import com.example.demo.service.CarPartService;
+import com.example.demo.web.dto.CarPartToCarModelDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +42,12 @@ public class CarPartController {
         return carPartService.getCarPartById(id);
     }
 
+    @GetMapping("/api/car-parts-by-name")
+    @ResponseBody
+    public Collection<CarPart> getCarPartByName(@RequestParam String name) {
+        return carPartService.getCarPartByName(name);
+    }
+
     @PostMapping("/api/car-parts")
     @ResponseBody
     public CarPart saveCarPart(CarPart carPart) {
@@ -71,6 +78,21 @@ public class CarPartController {
             return "add-car-part";
         }
         carPartService.saveCarPart(carPart);
+        return "redirect:/";
+    }
+    @GetMapping("/add-car-part-to-car-model")
+    public String showAddCarPartToCarModelForm(Model model) {
+        model.addAttribute("car_models", carModelService.getAllCarModels());
+        model.addAttribute("car_parts", carPartService.getAllCarParts());
+        return "add-car-part-to-car-model";
+    }
+
+    @PostMapping("/add-car-part-to-car-model")
+    public String addCarPartToCarModel(@Valid CarPartToCarModelDto carPartToCarModelDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return "add-car-part-to-car-model";
+        }
+        carPartService.addCarPartToCarModel(carPartToCarModelDto.getCarPartId(), carPartToCarModelDto.getCarModelId());
         return "redirect:/";
     }
 }

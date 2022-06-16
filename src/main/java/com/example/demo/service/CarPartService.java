@@ -16,5 +16,7 @@ public interface CarPartService {
 
     void deleteCarPart(Long id);
 
-    CarPart getCarPartByName(String name);
+    Collection<CarPart> getCarPartByName(String name);
+
+    void addCarPartToCarModel(Long carPartId, Long carModelId);
 }

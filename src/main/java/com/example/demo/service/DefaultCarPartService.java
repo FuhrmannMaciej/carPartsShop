@@ -54,7 +54,12 @@ public class DefaultCarPartService implements CarPartService {
     }
 
     @Override
-    public CarPart getCarPartByName(String name) {
+    public Collection<CarPart> getCarPartByName(String name) {
         return carPartRepository.findByName(name);
+    }
+
+    @Override
+    public void addCarPartToCarModel(Long carPartId, Long carModelId) {
+        carPartRepository.addCarPartToCarModel(carPartId, carModelId);
     }
 }
