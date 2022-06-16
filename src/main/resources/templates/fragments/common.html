@@ -19,6 +19,7 @@
             <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
             <a class="navbar-brand" href="#" th:href="@{/add-car-model}">Add Car Model</a>
             <a class="navbar-brand" href="#" th:href="@{/add-car-part}">Add Car Part</a>
+            <a class="navbar-brand" href="#" th:href="@{/add-car-part-to-car-model}">Assign Car Part to Car Model</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul th:if="${#authorization.expression('isAuthenticated()')}" class="nav navbar-nav">

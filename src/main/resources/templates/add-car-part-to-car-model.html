@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Car Parts Shop</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+</head>
+<body>
+
+<!-- create navigation bar ( header) -->
+<div th:replace="fragments/common :: header"></div>
+
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <h1> Add Car Part to Car Model </h1>
+            <form th:action="@{/add-car-part-to-car-model}" method="post">
+
+                <!-- error message -->
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Something went wrong.</div>
+                </div>
+
+                <!-- logout message -->
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">Car Part added to Car Model successfully.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">Car Model</label> :
+                    <select id="car_model" name="car_model">
+                        <option th:each="car_model : ${car_models}" th:value="${car_model.id}"
+                                th:utext="${car_model.name} + ' ' + ${car_model.yearOfProduction}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">Car Part</label> :
+                    <select id="car_part" name="car_part">
+                        <option th:each="car_part : ${car_parts}" th:value="${car_part.id}"
+                                th:utext="${car_part.name} + ' ' + ${car_part.price} + ' PLN'"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" class="form-control btn btn-primary" value="Submit"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
