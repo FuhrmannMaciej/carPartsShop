@@ -8,6 +8,7 @@ import com.example.demo.web.dto.CarPartToCarModelDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -87,7 +88,7 @@ public class CarPartController {
         return "add-car-part-to-car-model";
     }
 
-    @PostMapping("/add-car-part-to-car-model")
+    @PostMapping( value = "/add-car-part-to-car-model")
     public String addCarPartToCarModel(@Valid CarPartToCarModelDto carPartToCarModelDto, BindingResult result) {
         if (result.hasErrors()) {
             return "add-car-part-to-car-model";

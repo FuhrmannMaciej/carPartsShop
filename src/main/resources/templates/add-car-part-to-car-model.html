@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <label class="col-form-label">Car Model</label> :
-                    <select id="car_model" name="car_model">
+                    <select id="car_model" name="carModelId">
                         <option th:each="car_model : ${car_models}" th:value="${car_model.id}"
                                 th:utext="${car_model.name} + ' ' + ${car_model.yearOfProduction}"></option>
                     </select>
@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label class="col-form-label">Car Part</label> :
-                    <select id="car_part" name="car_part">
+                    <select id="car_part" name="carPartId">
                         <option th:each="car_part : ${car_parts}" th:value="${car_part.id}"
                                 th:utext="${car_part.name} + ' ' + ${car_part.price} + ' PLN'"></option>
                     </select>
