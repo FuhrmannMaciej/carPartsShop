@@ -5,6 +5,8 @@ import com.example.demo.service.CarModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,7 @@ public class CarModelController {
     @GetMapping("/api/car-models")
     @ResponseBody
     public Page<CarModel> getAllCarModels(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "20") int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
+        Pageable pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Order.asc("id"), Sort.Order.desc("name")));
         return carModelService.getAllCarModels(pageRequest);
     }
 

@@ -4,7 +4,7 @@ import com.example.demo.entity.CarModel;
 import com.example.demo.repository.CarModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,8 +17,8 @@ public class DefaultCarModelService implements CarModelService {
     private CarModelRepository carModelRepository;
 
     @Override
-    public Page<CarModel> getAllCarModels(PageRequest pageRequest) {
-        return carModelRepository.findAll(pageRequest);
+    public Page<CarModel> getAllCarModels(Pageable pageable) {
+        return carModelRepository.findAll(pageable);
     }
 
     @Override
