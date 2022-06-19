@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DefaultCarModelService implements CarModelService {
@@ -27,8 +28,8 @@ public class DefaultCarModelService implements CarModelService {
     }
 
     @Override
-    public CarModel getCarModelById(Long id) {
-        return carModelRepository.findById(id).orElse(null);
+    public Optional<CarModel> getCarModelById(Long id) {
+        return carModelRepository.findById(id);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class DefaultCarModelService implements CarModelService {
             carModelDB.setName(carModel.getName());
         }
 
-        if (Objects.nonNull(carModel.getYearOfProduction())) {
+        if (carModel.getYearOfProduction() > 0) {
             carModelDB.setYearOfProduction(carModel.getYearOfProduction());
         }
 

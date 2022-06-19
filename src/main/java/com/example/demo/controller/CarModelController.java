@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class CarModelController {
@@ -28,7 +29,7 @@ public class CarModelController {
 
     @GetMapping("/api/car-models/{id}")
     @ResponseBody
-    public CarModel getCarModelById(Long id) {
+    public Optional<CarModel> getCarModelById(@PathVariable Long id) {
         return carModelService.getCarModelById(id);
     }
 
@@ -40,13 +41,13 @@ public class CarModelController {
 
     @PutMapping("/api/car-models/{id}")
     @ResponseBody
-    public CarModel updateCarModel(CarModel carModel, Long id) {
+    public CarModel updateCarModel(CarModel carModel, @PathVariable Long id) {
         return carModelService.updateCarModel(carModel, id);
     }
 
     @DeleteMapping("/api/car-models/{id}")
     @ResponseBody
-    public void deleteCarModel(Long id) {
+    public void deleteCarModel(@PathVariable Long id) {
         carModelService.deleteCarModel(id);
     }
 
