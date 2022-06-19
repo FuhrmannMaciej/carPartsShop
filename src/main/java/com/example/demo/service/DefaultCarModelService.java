@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.CarModel;
+import com.example.demo.exception.CarModelNotFoundException;
 import com.example.demo.repository.CarModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,10 @@ public class DefaultCarModelService implements CarModelService {
 
     @Override
     public Optional<CarModel> getCarModelById(Long id) {
+        Optional<CarModel> carModelOptional = carModelRepository.findById(id);
+        if (carModelOptional.isEmpty()) {
+            throw new CarModelNotFoundException();
+        }
         return carModelRepository.findById(id);
     }
 
@@ -38,32 +43,48 @@ public class DefaultCarModelService implements CarModelService {
     }
 
     @Override
-    public CarModel updateCarModel(CarModel carModel, Long id) {
-        CarModel carModelDB = carModelRepository.findById(id).get();
-
-        if (Objects.nonNull(carModel.getName()) && !carModel.getName().isEmpty()) {
-            carModelDB.setName(carModel.getName());
+    public void updateCarModel(CarModel carModel, Long id) {
+        Optional<CarModel> carModelOptional = carModelRepository.findById(id);
+        if (carModelOptional.isPresent()) {
+            CarModel carModelToUpdate = carModelOptional.get();
+            if (Objects.nonNull(carModel.getName()) && !carModel.getName().isEmpty()) {
+                carModelToUpdate.setName(carModel.getName());
+            }
+            if (carModel.getYearOfProduction() > 0) {
+                carModelToUpdate.setYearOfProduction(carModel.getYearOfProduction());
+            }
+            carModelRepository.updateCarModel(carModelToUpdate.getName(), carModelToUpdate.getYearOfProduction(), id);
+        } else {
+            throw new CarModelNotFoundException();
         }
-
-        if (carModel.getYearOfProduction() > 0) {
-            carModelDB.setYearOfProduction(carModel.getYearOfProduction());
-        }
-
-        return carModelRepository.save(carModelDB);
     }
 
     @Override
     public void deleteCarModel(Long id) {
-        carModelRepository.deleteById(id);
+        Optional<CarModel> carModelOptional = carModelRepository.findById(id);
+        if (carModelOptional.isPresent()) {
+            carModelOptional.get().getCarParts().forEach(carPart -> carPart.setCarModels(null) );
+            carModelRepository.deleteById(id);
+        } else {
+            throw new CarModelNotFoundException();
+        }
     }
 
     @Override
-    public CarModel getCarModelByName(String name) {
-        return carModelRepository.findByName(name);
+    public Optional<CarModel> getCarModelByName(String name) {
+        Optional<CarModel> carModelOptional = carModelRepository.findByName(name);
+        if (carModelOptional.isEmpty()) {
+            throw new CarModelNotFoundException();
+        }
+        return carModelOptional;
     }
 
     @Override
-    public CarModel getCarModelByYearOfProduction(int yearOfProduction) {
-        return carModelRepository.findByYearOfProduction(yearOfProduction);
+    public Optional<CarModel> getCarModelByYearOfProduction(int yearOfProduction) {
+        Optional<CarModel> carModelOptional = carModelRepository.findByYearOfProduction(yearOfProduction);
+        if (carModelOptional.isEmpty()) {
+            throw new CarModelNotFoundException();
+        }
+        return carModelOptional;
     }
 }

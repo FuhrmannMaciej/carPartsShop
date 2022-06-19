@@ -17,11 +17,11 @@ public interface CarModelService {
 
     CarModel saveCarModel(CarModel carModel);
 
-    CarModel updateCarModel(CarModel carModel, Long id);
+    void updateCarModel(CarModel carModel, Long id);
 
     void deleteCarModel(Long id);
 
-    CarModel getCarModelByName(String name);
+    Optional<CarModel> getCarModelByName(String name);
 
-    CarModel getCarModelByYearOfProduction(int yearOfProduction);
+    Optional<CarModel> getCarModelByYearOfProduction(int yearOfProduction);
 }

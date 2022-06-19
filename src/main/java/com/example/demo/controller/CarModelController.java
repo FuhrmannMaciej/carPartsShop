@@ -41,8 +41,8 @@ public class CarModelController {
 
     @PutMapping("/api/car-models/{id}")
     @ResponseBody
-    public CarModel updateCarModel(CarModel carModel, @PathVariable Long id) {
-        return carModelService.updateCarModel(carModel, id);
+    public void updateCarModel(@Valid @RequestBody CarModel carModel, @PathVariable Long id) {
+        carModelService.updateCarModel(carModel, id);
     }
 
     @DeleteMapping("/api/car-models/{id}")
