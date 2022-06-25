@@ -1,0 +1,43 @@
+curl --location --request GET 'http://localhost:8082/api/car-models'
+
+curl --location --request DELETE 'http://localhost:8082/api/car-models/1'
+
+curl --location --request POST "http://localhost:8082/api/car-models" --header "Content-Type: application/json" --data-raw '{"name": "Mazda", "yearOfProduction": 1991}'
+
+curl --location --request POST "http://localhost:8082/api/car-models" \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Mazda",
+    "yearOfProduction": 1991
+}'
+
+curl --location --request PUT 'http://localhost:8082/api/car-models/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Mazda",
+    "yearOfProduction": 1970
+}'
+
+curl --location --request GET 'http://localhost:8082/api/car-models/1'
+
+curl --location --request GET 'http://localhost:8082/api/car-parts'
+
+curl --location --request GET 'http://localhost:8082/api/car-parts/190'
+
+curl --location --request POST 'http://localhost:8082/api/car-parts' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Spoiler",
+    "price": 19.91,
+    "quantity": 51
+}'
+
+curl --location --request PUT 'http://localhost:8082/api/car-parts/190' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Engine",
+    "price": 19.93,
+    "quantity": 54
+}'
+
+curl --location --request DELETE 'http://localhost:8082/api/car-parts/190'
