@@ -21,7 +21,7 @@ public interface CarModelService {
 
     void deleteCarModel(Long id);
 
-    Optional<CarModel> getCarModelByName(String name);
+    Collection<CarModel> getCarModelByName(String name);
 
-    Optional<CarModel> getCarModelByYearOfProduction(int yearOfProduction);
+    Collection<CarModel> getCarModelByYearOfProduction(int yearOfProduction);
 }

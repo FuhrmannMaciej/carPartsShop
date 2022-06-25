@@ -8,13 +8,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.Collection;
 
 @Repository
 public interface CarModelRepository extends JpaRepository<CarModel, Long> {
-    Optional<CarModel> findByName(String name);
+    @Query(value = "SELECT c FROM car_model c WHERE c.name = :name", nativeQuery = true)
+    Collection<CarModel> findByName(@Param("name") String name);
 
-    Optional<CarModel> findByYearOfProduction(int yearOfProduction);
+    @Query(value = "SELECT c FROM car_model c WHERE c.year_of_production = :year_of_production", nativeQuery = true)
+    Collection<CarModel> findByYearOfProduction(@Param("year_of_production") int yearOfProduction);
 
     @Transactional
     @Modifying

@@ -34,7 +34,7 @@ public class DefaultCarModelService implements CarModelService {
         if (carModelOptional.isEmpty()) {
             throw new CarModelNotFoundException();
         }
-        return carModelRepository.findById(id);
+        return carModelOptional;
     }
 
     @Override
@@ -71,20 +71,20 @@ public class DefaultCarModelService implements CarModelService {
     }
 
     @Override
-    public Optional<CarModel> getCarModelByName(String name) {
-        Optional<CarModel> carModelOptional = carModelRepository.findByName(name);
-        if (carModelOptional.isEmpty()) {
+    public Collection<CarModel> getCarModelByName(String name) {
+        Collection<CarModel> carModels = carModelRepository.findByName(name);
+        if (carModels.isEmpty()) {
             throw new CarModelNotFoundException();
         }
-        return carModelOptional;
+        return carModels;
     }
 
     @Override
-    public Optional<CarModel> getCarModelByYearOfProduction(int yearOfProduction) {
-        Optional<CarModel> carModelOptional = carModelRepository.findByYearOfProduction(yearOfProduction);
-        if (carModelOptional.isEmpty()) {
+    public Collection<CarModel> getCarModelByYearOfProduction(int yearOfProduction) {
+        Collection<CarModel> carModels = carModelRepository.findByYearOfProduction(yearOfProduction);
+        if (carModels.isEmpty()) {
             throw new CarModelNotFoundException();
         }
-        return carModelOptional;
+        return carModels;
     }
 }
