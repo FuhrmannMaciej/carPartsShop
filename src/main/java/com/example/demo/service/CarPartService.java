@@ -1,18 +1,22 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.CarPart;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface CarPartService {
 
     Collection<CarPart> getAllCarParts();
+    Page<CarPart> getAllCarParts(Pageable pageable);
 
-    CarPart getCarPartById(Long id);
+    Optional<CarPart> getCarPartById(Long id);
 
     CarPart saveCarPart(CarPart carPart);
 
-    CarPart updateCarPart(CarPart carPart, Long id);
+    void updateCarPart(CarPart carPart, Long id);
 
     void deleteCarPart(Long id);
 

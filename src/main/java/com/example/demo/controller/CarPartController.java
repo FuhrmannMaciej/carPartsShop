@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.CarModel;
 import com.example.demo.entity.CarPart;
 import com.example.demo.service.CarModelService;
 import com.example.demo.service.CarPartService;
@@ -8,7 +7,8 @@ import com.example.demo.web.dto.CarPartToCarModelDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Optional;
 
 @Controller
 public class CarPartController {
@@ -33,13 +34,14 @@ public class CarPartController {
 
     @GetMapping("/api/car-parts")
     @ResponseBody
-    public Collection<CarPart> getAllCarParts() {
-        return carPartService.getAllCarParts();
+    public Page<CarPart> getAllCarParts(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "20") int size) {
+            Pageable pageRequest = PageRequest.of(page-1, size, Sort.by(Sort.Order.asc("id"), Sort.Order.desc("name")));
+        return carPartService.getAllCarParts(pageRequest);
     }
 
     @GetMapping("/api/car-parts/{id}")
     @ResponseBody
-    public CarPart getCarPartById(Long id) {
+    public Optional<CarPart> getCarPartById(@PathVariable Long id) {
         return carPartService.getCarPartById(id);
     }
 
@@ -51,19 +53,19 @@ public class CarPartController {
 
     @PostMapping("/api/car-parts")
     @ResponseBody
-    public CarPart saveCarPart(CarPart carPart) {
+    public CarPart saveCarPart(@Valid @RequestBody CarPart carPart) {
         return carPartService.saveCarPart(carPart);
     }
 
     @PutMapping("/api/car-parts/{id}")
     @ResponseBody
-    public CarPart updateCarPart(CarPart carPart, Long id) {
-        return carPartService.updateCarPart(carPart, id);
+    public void  updateCarPart(@Valid @RequestBody CarPart carPart, @PathVariable Long id) {
+        carPartService.updateCarPart(carPart, id);
     }
 
     @DeleteMapping("/api/car-parts/{id}")
     @ResponseBody
-    public void deleteCarPart(Long id) {
+    public void deleteCarPart(@PathVariable Long id) {
         carPartService.deleteCarPart(id);
     }
 
