@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.CarModel;
 import com.example.demo.entity.CarPart;
-import com.example.demo.exception.CarModelNotFoundException;
 import com.example.demo.exception.CarPartNotFoundException;
 import com.example.demo.repository.CarPartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
