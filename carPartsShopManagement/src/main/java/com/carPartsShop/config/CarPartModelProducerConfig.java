@@ -1,8 +1,8 @@
 package com.carPartsShop.config;
 
 import com.carPartsShop.web.dto.CarPartModelKafkaDto;
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Configuration
 public class CarPartModelProducerConfig {
 
-    @Value("0")
+    @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     @Bean
