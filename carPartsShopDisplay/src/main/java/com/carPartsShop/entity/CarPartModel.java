@@ -19,6 +19,12 @@ public class CarPartModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "car_part_source_system_id")
+    private Long carPartSourceSystemId;
+
+    @Column(name = "car_model_source_system_id")
+    private Long carModelSourceSystemId;
+
     @Column(name = "car_model_name")
     private String carModelName;
 
