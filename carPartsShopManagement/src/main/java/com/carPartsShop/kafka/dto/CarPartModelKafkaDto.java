@@ -1,4 +1,4 @@
-package com.carPartsShop.web.dto;
+package com.carPartsShop.kafka.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,10 @@ import javax.persistence.Column;
 @Getter
 @Setter
 public class CarPartModelKafkaDto {
+
+    private Long carPartSourceSystemId;
+
+    private Long carModelSourceSystemId;
 
     private String carModelName;
 

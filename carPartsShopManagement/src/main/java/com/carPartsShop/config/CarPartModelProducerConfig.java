@@ -1,6 +1,6 @@
 package com.carPartsShop.config;
 
-import com.carPartsShop.web.dto.CarPartModelKafkaDto;
+import com.carPartsShop.kafka.dto.CarPartModelKafkaDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
