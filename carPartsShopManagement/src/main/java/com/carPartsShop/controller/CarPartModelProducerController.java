@@ -13,10 +13,10 @@ public class CarPartModelProducerController {
     @Autowired
     CarPartModelProducerService producerService;
 
-    @PostMapping(value = "/producer")
-    public String sendMessage()
+    @PostMapping(value = "/producer/sync")
+    public String sync()
     {
-        producerService.send();
+        producerService.syncCarPartModels();
         return "Message sent Successfully to the topic";
     }
 }

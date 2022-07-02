@@ -1,6 +1,8 @@
 package com.carPartsShop.service;
 
+import com.carPartsShop.entity.CarModel;
 import com.carPartsShop.exception.CarPartNotFoundException;
+import com.carPartsShop.repository.CarModelRepository;
 import com.carPartsShop.repository.CarPartRepository;
 import com.carPartsShop.entity.CarPart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,12 @@ public class DefaultCarPartService implements CarPartService {
 
     @Autowired
     private CarPartRepository carPartRepository;
+
+    @Autowired
+    private CarModelRepository carModelRepository;
+
+    @Autowired
+    private CarPartModelProducerService carPartModelProducerService;
 
     @Override
     public Collection<CarPart> getAllCarParts() {
@@ -39,7 +47,13 @@ public class DefaultCarPartService implements CarPartService {
 
     @Override
     public CarPart saveCarPart(CarPart carPart) {
-        return carPartRepository.save(carPart);
+        // add car model as argument and pass from ui
+        Long carModelId = 0L;
+        CarModel carModel = carModelRepository.findById(carModelId).orElseThrow();
+        carPart.getCarModels().add(carModel);
+        CarPart savedCarPart = carPartRepository.save(carPart);
+        carPartModelProducerService.sendCarPartModelUpdate(carPart.getId(), carModelId);
+        return savedCarPart;
     }
 
     @Override
@@ -85,5 +99,6 @@ public class DefaultCarPartService implements CarPartService {
     @Override
     public void addCarPartToCarModel(Long carPartId, Long carModelId) {
         carPartRepository.addCarPartToCarModel(carPartId, carModelId);
+        carPartModelProducerService.sendCarPartModelUpdate(carPartId, carModelId);
     }
 }

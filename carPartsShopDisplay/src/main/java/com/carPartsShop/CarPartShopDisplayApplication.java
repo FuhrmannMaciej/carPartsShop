@@ -21,6 +21,7 @@ public class CarPartShopDisplayApplication {
     @KafkaListener(topics = AppConstants.TOPIC, groupId=AppConstants.GROUP_ID)
     public void listen(CarPartModel json) {
         System.out.println("Received info--> : " +json);
-        carPartModelService.saveCarPartModel(json);
+
+        carPartModelService.saveOrUpdateCarPartModel(json);
     }
 }

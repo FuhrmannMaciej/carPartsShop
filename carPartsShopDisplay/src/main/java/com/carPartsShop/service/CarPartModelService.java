@@ -8,6 +8,6 @@ public interface CarPartModelService {
 
     Collection<CarPartModel> getAllCarPartModels();
 
-    CarPartModel saveCarPartModel(CarPartModel carPartModel);
+    CarPartModel saveOrUpdateCarPartModel(CarPartModel carPartModel);
 
 }
