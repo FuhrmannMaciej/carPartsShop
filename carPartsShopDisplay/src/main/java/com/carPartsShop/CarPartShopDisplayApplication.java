@@ -1,3 +1,5 @@
+package com.carPartsShop;
+
 import com.carPartsShop.config.AppConstants;
 import com.carPartsShop.entity.CarPartModel;
 import com.carPartsShop.service.CarPartModelService;
