@@ -6,9 +6,10 @@
         <groupId>com.carPartsShop</groupId>
         <artifactId>carPartsShop</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>carPartsShopManagement</artifactId>
 
     <properties>
