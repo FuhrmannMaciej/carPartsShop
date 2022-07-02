@@ -1,4 +1,4 @@
-package entity;
+package com.carPartsShop.entity;
 
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
