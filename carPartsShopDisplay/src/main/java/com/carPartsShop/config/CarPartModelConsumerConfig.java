@@ -44,7 +44,6 @@ public class CarPartModelConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String, CarPartModel>
                 factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        factory.setBatchListener(true);
         return factory;
     }
 }
