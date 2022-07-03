@@ -20,6 +20,7 @@
 	<modules>
 		<module>carPartsShopManagement</module>
 		<module>carPartsShopDisplay</module>
+		<module>utils</module>
 	</modules>
 
 	<properties>
