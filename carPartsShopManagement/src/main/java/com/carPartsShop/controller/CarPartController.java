@@ -53,8 +53,8 @@ public class CarPartController {
 
     @PostMapping("/api/car-parts")
     @ResponseBody
-    public CarPart saveCarPart(@Valid @RequestBody CarPart carPart) {
-        return carPartService.saveCarPart(carPart);
+    public CarPart saveCarPart(@Valid @RequestBody CarPart carPart, @RequestBody Long carModelId) {
+        return carPartService.saveCarPart(carPart, carModelId);
     }
 
     @PutMapping("/api/car-parts/{id}")
@@ -76,11 +76,11 @@ public class CarPartController {
     }
 
     @PostMapping("/add-car-part")
-    public String saveCarPart(@Valid CarPart carPart, BindingResult result) {
+    public String saveCarPart(@Valid CarPart carPart, @Valid Long carModelId, BindingResult result) {
         if (result.hasErrors()) {
             return "add-car-part";
         }
-        carPartService.saveCarPart(carPart);
+        carPartService.saveCarPart(carPart, carModelId);
         return "redirect:/";
     }
     @GetMapping("/add-car-part-to-car-model")

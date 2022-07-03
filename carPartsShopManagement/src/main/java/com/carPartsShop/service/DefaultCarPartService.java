@@ -1,6 +1,7 @@
 package com.carPartsShop.service;
 
 import com.carPartsShop.entity.CarModel;
+import com.carPartsShop.exception.CarModelNotFoundException;
 import com.carPartsShop.exception.CarPartNotFoundException;
 import com.carPartsShop.repository.CarModelRepository;
 import com.carPartsShop.repository.CarPartRepository;
@@ -46,14 +47,15 @@ public class DefaultCarPartService implements CarPartService {
     }
 
     @Override
-    public CarPart saveCarPart(CarPart carPart) {
-        // add car model as argument and pass from ui
-        Long carModelId = 0L;
-        CarModel carModel = carModelRepository.findById(carModelId).orElseThrow();
-        carPart.getCarModels().add(carModel);
-        CarPart savedCarPart = carPartRepository.save(carPart);
-        carPartModelProducerService.sendCarPartModelUpdate(carPart.getId(), carModelId);
-        return savedCarPart;
+    public CarPart saveCarPart(CarPart carPart, Long carModelId) {
+        Optional<CarModel> carModel = carModelRepository.findById(carModelId);
+        if (carModel.isPresent()) {
+            CarPart savedCarPart = carPartRepository.save(carPart);
+            carPartRepository.addCarPartToCarModel(savedCarPart.getId(), carModelId);
+            carPartModelProducerService.sendCarPartModelUpdate(carModelId, savedCarPart.getId());
+            return savedCarPart;
+        }
+        throw new CarModelNotFoundException();
     }
 
     @Override

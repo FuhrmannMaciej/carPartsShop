@@ -15,11 +15,6 @@ public class CarPartModelController {
     @Autowired
     private CarPartModelService carPartModelService;
 
-    @GetMapping("/carPartModels")
-    public String getAllCarPartModels() {
-        return "carPartModels";
-    }
-
     @GetMapping("/api/carPartModels")
     @ResponseBody
     public Collection<CarPartModel> getAllCarModels() {

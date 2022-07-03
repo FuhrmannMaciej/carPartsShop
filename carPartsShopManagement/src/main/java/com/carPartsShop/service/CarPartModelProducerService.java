@@ -3,8 +3,9 @@ package com.carPartsShop.service;
 import com.carPartsShop.config.AppConstants;
 import com.carPartsShop.entity.CarModel;
 import com.carPartsShop.entity.CarPart;
-import com.carPartsShop.repository.CarModelRepository;
+import com.carPartsShop.exception.CarPartOrCarModelNotFoundException;
 import com.carPartsShop.kafka.dto.CarPartModelKafkaDto;
+import com.carPartsShop.repository.CarModelRepository;
 import com.carPartsShop.repository.CarPartRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -56,11 +58,13 @@ public class CarPartModelProducerService {
     }
 
     public void sendCarPartModelUpdate(Long carModelId, Long carPartId) {
-        CarModel carModel = carModelRepository.findById(carModelId).orElseThrow();
-        CarPart carPart = carPartRepository.findById(carPartId).orElseThrow();
-
-        CarPartModelKafkaDto json = createCarPartModelKafkaDto(carModel, carPart);
-
-        kafkaTemplate.send(AppConstants.TOPIC, json);
+        Optional<CarModel> carModel = carModelRepository.findById(carModelId);
+        Optional<CarPart> carPart = carPartRepository.findById(carPartId);
+        if (carModel.isPresent() && carPart.isPresent()) {
+            CarPartModelKafkaDto json = createCarPartModelKafkaDto(carModel.get(), carPart.get());
+            kafkaTemplate.send(AppConstants.TOPIC, json);
+        } else {
+            throw new CarPartOrCarModelNotFoundException();
+        }
     }
 }

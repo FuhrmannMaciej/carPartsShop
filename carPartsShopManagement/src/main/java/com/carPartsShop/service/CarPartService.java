@@ -14,7 +14,7 @@ public interface CarPartService {
 
     Optional<CarPart> getCarPartById(Long id);
 
-    CarPart saveCarPart(CarPart carPart);
+    CarPart saveCarPart(CarPart carPart, Long carModelId);
 
     void updateCarPart(CarPart carPart, Long id);
 

@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <label  class="col-form-label">Car Model Name</label> :
-                    <select  id="car_model" name="car_model" >
+                    <select  id="carModelId" name="carModelId" >
                         <option th:each="car_model : ${car_models}" th:value="${car_model.id}" th:utext="${car_model.name} + ' ' + ${car_model.yearOfProduction}"></option>
                     </select>
                 </div>
