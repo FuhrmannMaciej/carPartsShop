@@ -59,8 +59,8 @@ public class DefaultCarPartService implements CarPartService {
     }
 
     @Override
-    public void updateCarPart(CarPart carPart, Long id) {
-        Optional<CarPart> optionalCarPart = carPartRepository.findById(id);
+    public void updateCarPart(CarPart carPart, Long carPartId) {
+        Optional<CarPart> optionalCarPart = carPartRepository.findById(carPartId);
         if (optionalCarPart.isPresent()) {
             CarPart carPartToUpdate = optionalCarPart.get();
             if (Objects.nonNull(carPart.getName()) && !carPart.getName().isEmpty()) {
@@ -72,7 +72,7 @@ public class DefaultCarPartService implements CarPartService {
             if (carPart.getQuantity() >= 0) {
                 carPartToUpdate.setQuantity(carPart.getQuantity());
             }
-            carPartRepository.updateCarPart(carPartToUpdate.getName(), carPartToUpdate.getPrice(), carPartToUpdate.getQuantity(), id);
+            carPartRepository.updateCarPart(carPartToUpdate.getName(), carPartToUpdate.getPrice(), carPartToUpdate.getQuantity(), carPartId);
         } else {
             throw new CarPartNotFoundException();
         }
